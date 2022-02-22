@@ -30,5 +30,15 @@ export default class InMemoryContactRepository implements IRepository<Contact> {
         }
         return Promise.reject();
     }
+    update(props: ContactProps, id: string): Promise<Contact> {
+        const contactIndex = this.list.findIndex(element => element.id === id)
+        if (contactIndex === -1) {
+            return Promise.reject("Contact not found");
+        }
+        const contact = Contact.of(props, id);
+        this.list[contactIndex] = contact;
+
+        return Promise.resolve(contact)
+    }
 
 }
