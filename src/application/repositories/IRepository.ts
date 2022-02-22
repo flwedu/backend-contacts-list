@@ -6,4 +6,5 @@ export default interface IRepository<T> {
     findAll(): Promise<T[]>;
     save(props: Props<T>, id?: string): Promise<T>;
     delete(id?: string): Promise<void>;
+    update(props: Props<T>, id: string): Promise<T>;
 }
