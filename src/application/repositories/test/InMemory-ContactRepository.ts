@@ -23,8 +23,12 @@ export default class InMemoryContactRepository implements IRepository<Contact> {
         return Promise.resolve(contact)
     }
     delete(id?: string): Promise<void> {
+        const previousLength = this.list.length
         this.list = this.list.filter(contact => contact.id !== id);
-        return Promise.resolve();
+        if (previousLength > this.list.length) {
+            return Promise.resolve();
+        }
+        return Promise.reject();
     }
 
 }
