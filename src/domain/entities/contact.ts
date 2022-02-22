@@ -1,5 +1,11 @@
 import { Entity } from "./Entity";
 
+export type QueryProps<Contact> = {
+    name?: string;
+    email?: string;
+    telephone?: string;
+}
+
 export type Props<Contact> = {
     name: string;
     email: string;
