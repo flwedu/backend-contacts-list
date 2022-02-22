@@ -1,4 +1,4 @@
-import { Contact, ContactQueryProps } from "../../domain/entities/contact";
+import { Contact } from "../../domain/entities/contact";
 import IRepository from "../repositories/IRepository";
 
 export default class ListAllContacts {
@@ -7,7 +7,7 @@ export default class ListAllContacts {
     }
 
     async execute() {
-        return await this.repository.findAll();
+        return this.repository.findAll();
     }
 
 }
