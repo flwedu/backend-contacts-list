@@ -2,7 +2,7 @@ import InMemoryContactRepository from "../repositories/test/InMemory-ContactRepo
 import CreateContact from "./create-contact";
 import ListAllContacts from "./list-all-contacts";
 
-describe("Create contact use case", () => {
+describe("list all contacts use case", () => {
 
     beforeEach(() => {
         jest.clearAllMocks();
