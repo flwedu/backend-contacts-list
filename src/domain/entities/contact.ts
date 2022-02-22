@@ -1,12 +1,12 @@
-import { Entity } from "./Entity";
+import { Entity, Props } from "./Entity";
 
-export type QueryProps<Contact> = {
+export type ContactQueryProps = {
     name?: string;
     email?: string;
     telephone?: string;
 }
 
-export type Props<Contact> = {
+export interface ContactProps extends Props<Contact> {
     name: string;
     email: string;
     telephone: string;
@@ -15,11 +15,11 @@ export type Props<Contact> = {
 
 export class Contact extends Entity {
 
-    private constructor(props: Props<Contact>, id?: string) {
+    private constructor(props: ContactProps, id?: string) {
         super(props, id);
     }
 
-    static of(props: Props<Contact>, id?: string): Contact {
+    static of(props: ContactProps, id?: string): Contact {
         return new Contact(props, id);
     }
 
