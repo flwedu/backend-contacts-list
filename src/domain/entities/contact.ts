@@ -6,7 +6,7 @@ export type ContactQueryProps = {
     telephone?: string;
 }
 
-export interface ContactProps extends Props<Contact> {
+export interface ContactProps extends Props {
     name: string;
     email: string;
     telephone: string;
