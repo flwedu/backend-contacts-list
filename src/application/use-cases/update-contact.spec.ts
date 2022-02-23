@@ -27,10 +27,8 @@ describe("update contacts use cases", () => {
             imageUrl: "",
         }, contact.id)
 
-        //@ts-ignore
-        expect(updated.props.name).toEqual("Contact")
-        //@ts-ignore
-        expect(repository.list[0].props.name).toEqual("Contact");
+        expect(updated.name).toEqual("Contact")
+        expect(repository.list[0].name).toEqual("Contact");
         expect(spy).toBeCalledTimes(1);
     })
 })

@@ -1,26 +1,28 @@
-import { Entity, Props } from "./Entity";
+import crypto from "crypto"
 
-export type ContactQueryProps = {
-    name?: string;
-    email?: string;
-    telephone?: string;
-}
-
-export interface ContactProps extends Props {
+export interface ContactProps {
+    id?: string;
     name: string;
     email: string;
     telephone: string;
     imageUrl: string;
 }
 
-export class Contact extends Entity {
+export class Contact {
 
-    private constructor(props: ContactProps, id?: string) {
-        super(props, id);
+    id: string;
+    name: string;
+    email: string;
+    telephone: string;
+    imageUrl: string;
+
+    private constructor(props: ContactProps) {
+        Object.assign(this, props);
+        this.id = props.id ?? crypto.randomUUID();
     }
 
-    static of(props: ContactProps, id?: string): Contact {
-        return new Contact(props, id);
+    static of(props: ContactProps): Contact {
+        return new Contact(props);
     }
 
 }

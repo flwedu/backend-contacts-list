@@ -1,10 +1,8 @@
-import { Entity, Props } from "../../domain/entities/Entity";
-
-export default interface IRepository<T extends Entity> {
+export default interface IRepository<T extends any> {
 
     findById(id: string): Promise<T>;
     findAll(): Promise<T[]>;
-    save(props: Props, id?: string): Promise<T>;
-    delete(id?: string): Promise<void>;
-    update(props: Props, id: string): Promise<T>;
+    save(props: any): Promise<T>;
+    delete(id: string): Promise<void>;
+    update(props: any, id: string): Promise<T>;
 }

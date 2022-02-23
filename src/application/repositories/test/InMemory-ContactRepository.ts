@@ -1,6 +1,6 @@
-import IRepository from "../IRepository";
-import { Contact, ContactProps, ContactQueryProps, } from "../../../domain/entities/contact"
+import { Contact, ContactProps } from "../../../domain/entities/contact";
 import { ResourceNotFound } from "../../../domain/errors/error";
+import IRepository from "../IRepository";
 
 export default class InMemoryContactRepository implements IRepository<Contact> {
 
@@ -17,13 +17,13 @@ export default class InMemoryContactRepository implements IRepository<Contact> {
 
         return Promise.resolve(this.list);
     }
-    save(props: ContactProps, id?: string): Promise<Contact> {
+    save(props: ContactProps): Promise<Contact> {
 
-        const contact = Contact.of(props, id);
+        const contact = Contact.of(props);
         this.list.push(contact);
         return Promise.resolve(contact)
     }
-    delete(id?: string): Promise<void> {
+    delete(id: string): Promise<void> {
         const previousLength = this.list.length
         this.list = this.list.filter(contact => contact.id !== id);
         if (previousLength > this.list.length) {
@@ -36,7 +36,7 @@ export default class InMemoryContactRepository implements IRepository<Contact> {
         if (contactIndex === -1) {
             throw new ResourceNotFound(`Contact ${id} not found`);
         }
-        const contact = Contact.of(props, id);
+        const contact = Contact.of(props);
         this.list[contactIndex] = contact;
 
         return Promise.resolve(contact)
