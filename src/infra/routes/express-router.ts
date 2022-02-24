@@ -1,7 +1,7 @@
 import { Router } from "express"
-import ListAllContactsController from "../presentation/controllers/list-all-contacts-controller";
-import SaveContactController from "../presentation/controllers/save-contact-controller";
-import { ExpressPrismaContactProvider } from "../presentation/providers/ExpressPrismaContactProvider";
+import ListAllContactsController from "../../presentation/controllers/list-all-contacts-controller";
+import SaveContactController from "../../presentation/controllers/save-contact-controller";
+import { ExpressPrismaContactProvider } from "../../presentation/providers/ExpressPrismaContactProvider";
 
 const router = Router();
 const provider = new ExpressPrismaContactProvider();
