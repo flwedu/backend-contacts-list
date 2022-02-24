@@ -1,9 +1,7 @@
-import express from "express"
-import router from "./routes";
+import router from "../infra/routes/express-router";
+import createExpressServer from "../infra/server/create-express-server";
 
-const app = express();
-app.use(express.json())
-app.use(router);
+const app = createExpressServer(router);
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 4000
 app.listen(PORT, () => console.log(`Server is running at http://localhost:${PORT}`));
