@@ -1,4 +1,5 @@
 import { Router } from "express"
+import DeleteContactController from "../../input/controllers/delete-contact-controller";
 import ListAllContactsController from "../../input/controllers/list-all-contacts-controller";
 import SaveContactController from "../../input/controllers/save-contact-controller";
 import UpdateContactController from "../../input/controllers/update-contact-controller";
@@ -26,6 +27,13 @@ export default function createExpressRouter(repository: IRepository<any>) {
         const view = await new UpdateContactController(repository).handle({ id, props: data });
 
         res.send(view.data).status(view.statusCode);
+    })
+
+    router.delete("/api/contacts/:id", async (req, res) => {
+        const id = req.params.id;
+        const responseEntity = await new DeleteContactController(repository).handle({ id });
+
+        res.send(responseEntity.data).status(responseEntity.statusCode);
     })
 
     return router;
