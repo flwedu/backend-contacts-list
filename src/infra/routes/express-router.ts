@@ -1,21 +1,23 @@
 import { Router } from "express"
-import ListAllContactsController from "../../presentation/controllers/list-all-contacts-controller";
-import SaveContactController from "../../presentation/controllers/save-contact-controller";
-import { ExpressPrismaContactProvider } from "../../presentation/providers/ExpressPrismaContactProvider";
+import ListAllContactsController from "../../input/controllers/list-all-contacts-controller";
+import SaveContactController from "../../input/controllers/save-contact-controller";
+import IRepository from "../../output/repositories/IRepository";
 
-const router = Router();
-const provider = new ExpressPrismaContactProvider();
+export default function createExpressRouter(repository: IRepository<any>) {
 
-router.get("/api/contacts", async (req, res) => {
+    const router = Router();
 
-    const view = await new ListAllContactsController(provider).handle();
-    res.send(view.data).status(view.statusCode);
-})
+    router.get("/api/contacts", async (req, res) => {
 
-router.post("/api/contacts", async (req, res) => {
-    const data = await req.body;
-    const view = await new SaveContactController(provider).handle(data);
-    res.send(view.data).status(view.statusCode);
-})
+        const view = await new ListAllContactsController(repository).handle();
+        res.send(view.data).status(view.statusCode);
+    })
 
-export default router;
+    router.post("/api/contacts", async (req, res) => {
+        const data = await req.body;
+        const view = await new SaveContactController(repository).handle(data);
+        res.send(view.data).status(view.statusCode);
+    })
+
+    return router;
+}
