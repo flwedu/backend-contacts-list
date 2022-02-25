@@ -1,2 +1,3 @@
 node_modules/
 prisma/database/database.db
+.vscode/settings.json
