@@ -10,10 +10,10 @@ export default class ListAllContactsController implements IController {
 
     async handle(): Promise<HttpResponseEntity<any>> {
         try {
-            const data = await new ListAllContacts(this.repository).execute();
+            const response = await new ListAllContacts(this.repository).execute();
             return {
                 statusCode: 200,
-                data
+                data: response
             }
         } catch (error) {
             return errorResponseEntity(error);
