@@ -1,5 +1,5 @@
-import { Contact } from "@prisma/client";
 import ListAllContacts from "../../application/use-cases/list-all-contacts";
+import { Contact } from "../../domain/entities/contact";
 import { ResourceNotFound } from "../../domain/errors/error";
 import IRepository from "../../output/repositories/IRepository";
 import { HttpResponseEntity, notFound, serverError } from "../contracts/http-response-entity";
