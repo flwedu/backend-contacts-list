@@ -1,17 +1,16 @@
 import ListAllContacts from "../../application/use-cases/list-all-contacts";
-import { Contact } from "../../domain/entities/contact";
 import { ResourceNotFound } from "../../domain/errors/error";
-import { IProvider } from "../providers/IProvider";
+import { repository } from "../../infra/config";
 import { HttpResponseEntity, notFound, serverError } from "../contracts/http-response-entity";
 import IController from "../contracts/IController";
 
 export default class ListAllContactsController implements IController {
 
-    constructor(private readonly provider: IProvider<Contact>) { }
+    constructor() { }
 
     async handle(): Promise<HttpResponseEntity<any>> {
         try {
-            const data = await new ListAllContacts(this.provider.getRepository()).execute();
+            const data = await new ListAllContacts(repository).execute();
             return {
                 statusCode: 200,
                 data
