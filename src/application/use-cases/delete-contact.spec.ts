@@ -1,3 +1,4 @@
+import { ResourceNotFound } from "../../domain/errors/error";
 import InMemoryContactRepository from "../../output/repositories/test/InMemory-ContactRepository";
 import CreateContact from "./create-contact";
 import DeleteContact from "./delete-contact";
@@ -10,7 +11,7 @@ describe("delete contact use case", () => {
 
     it("should delete one element", async () => {
 
-        expect.assertions(3);
+        expect.assertions(5);
 
         const repository = new InMemoryContactRepository();
         const createContact = new CreateContact(repository);
@@ -38,11 +39,17 @@ describe("delete contact use case", () => {
         //Asserting again
         expect(repository.list.length).toEqual(1);
         expect(spy).toBeCalledTimes(1);
+
+        //Deleting again
+        await sut.execute(contact2.id)
+
+        expect(repository.list.length).toEqual(0);
+        expect(spy).toBeCalledTimes(2);
     })
 
     it("should get an error when trying to delete one element", async () => {
 
-        expect.assertions(3);
+        expect.assertions(4);
 
         const repository = new InMemoryContactRepository();
         const createContact = new CreateContact(repository);
@@ -65,10 +72,11 @@ describe("delete contact use case", () => {
         expect(repository.list.length).toEqual(2);
 
         // Asserting the error
-        sut.execute("1").catch(() => {
+        sut.execute("1").catch((err) => {
 
             expect(spy).toBeCalledTimes(1);
             expect(repository.list.length).toEqual(2);
+            expect(err).toBeInstanceOf(ResourceNotFound);
         })
     })
 
