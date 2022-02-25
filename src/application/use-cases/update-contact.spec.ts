@@ -1,4 +1,4 @@
-import InMemoryContactRepository from "../repositories/test/InMemory-ContactRepository";
+import InMemoryContactRepository from "../../output/repositories/test/InMemory-ContactRepository";
 import CreateContact from "./create-contact";
 import UpdateContact from "./update-contact";
 

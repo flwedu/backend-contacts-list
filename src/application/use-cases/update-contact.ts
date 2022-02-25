@@ -1,5 +1,5 @@
 import { Contact, ContactProps } from "../../domain/entities/contact";
-import IRepository from "../repositories/IRepository";
+import IRepository from "../../output/repositories/IRepository";
 
 export default class UpdateContact {
 
