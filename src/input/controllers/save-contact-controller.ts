@@ -8,10 +8,10 @@ export default class SaveContactController implements IController {
 
     constructor(private readonly repository: IRepository<Contact>) { }
 
-    async handle(data: ContactProps): Promise<HttpResponseEntity> {
+    async handle(data: { props: ContactProps }): Promise<HttpResponseEntity> {
 
         try {
-            const response = await new CreateContact(this.repository).execute(data);
+            const response = await new CreateContact(this.repository).execute(data.props);
             return okResponseEntity(response);
         } catch (error) {
             return errorResponseEntity(error);
