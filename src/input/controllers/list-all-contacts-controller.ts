@@ -1,8 +1,7 @@
 import ListAllContacts from "../../application/use-cases/list-all-contacts";
 import { Contact } from "../../domain/entities/contact";
-import { ResourceNotFound } from "../../domain/errors/error";
 import IRepository from "../../output/repositories/IRepository";
-import { HttpResponseEntity, notFound, serverError } from "../contracts/http-response-entity";
+import { errorResponseEntity, HttpResponseEntity } from "../contracts/http-response-entity";
 import { IController } from "./IController";
 
 export default class ListAllContactsController implements IController {
@@ -17,10 +16,7 @@ export default class ListAllContactsController implements IController {
                 data
             }
         } catch (error) {
-            if (error instanceof ResourceNotFound) {
-                return notFound(error);
-            }
-            return serverError(error);
+            return errorResponseEntity(error);
         }
     }
 }
