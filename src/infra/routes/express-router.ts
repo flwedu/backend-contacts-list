@@ -1,5 +1,6 @@
 import { Router } from "express"
 import DeleteContactController from "../../input/controllers/delete-contact-controller";
+import FindContactController from "../../input/controllers/find-contact-controller";
 import ListAllContactsController from "../../input/controllers/list-all-contacts-controller";
 import SaveContactController from "../../input/controllers/save-contact-controller";
 import UpdateContactController from "../../input/controllers/update-contact-controller";
@@ -12,6 +13,12 @@ export default function createExpressRouter(repository: IRepository<any>) {
     router.get("/contacts", async (req, res) => {
 
         const responseEntity = await new ListAllContactsController(repository).handle();
+        res.send(responseEntity.data).status(responseEntity.statusCode);
+    })
+
+    router.get("/contacts/:id", async (req, res) => {
+        const id = req.params.id;
+        const responseEntity = await new FindContactController(repository).handle({ id });
         res.send(responseEntity.data).status(responseEntity.statusCode);
     })
 
