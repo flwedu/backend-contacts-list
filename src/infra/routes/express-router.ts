@@ -9,19 +9,19 @@ export default function createExpressRouter(repository: IRepository<any>) {
 
     const router = Router();
 
-    router.get("/api/contacts", async (req, res) => {
+    router.get("/contacts", async (req, res) => {
 
         const responseEntity = await new ListAllContactsController(repository).handle();
         res.send(responseEntity.data).status(responseEntity.statusCode);
     })
 
-    router.post("/api/contacts", async (req, res) => {
+    router.post("/contacts", async (req, res) => {
         const props = req.body;
         const responseEntity = await new SaveContactController(repository).handle({ props });
         res.send(responseEntity.data).status(responseEntity.statusCode);
     })
 
-    router.put("/api/contacts/:id", async (req, res) => {
+    router.put("/contacts/:id", async (req, res) => {
         const id = req.params.id;
         const props = req.body;
         const responseEntity = await new UpdateContactController(repository).handle({ id, props });
@@ -29,7 +29,7 @@ export default function createExpressRouter(repository: IRepository<any>) {
         res.send(responseEntity.data).status(responseEntity.statusCode);
     })
 
-    router.delete("/api/contacts/:id", async (req, res) => {
+    router.delete("/contacts/:id", async (req, res) => {
         const id = req.params.id;
         const responseEntity = await new DeleteContactController(repository).handle({ id });
 

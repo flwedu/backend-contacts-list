@@ -11,7 +11,7 @@ export default function App() {
 
     server.use(cors());
     server.use(express.json())
-    server.use(router);
+    server.use("/api", router);
 
     return server;
 }
